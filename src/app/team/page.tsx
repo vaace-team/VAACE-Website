@@ -16,7 +16,7 @@ import { baseURL } from "@/app/resources";
 import TableOfContents from "@/components/team/TableOfContents";
 import styles from "@/components/team/team.module.scss";
 import { person, team, social } from "@/app/resources/content";
-import React from "react";
+import React, { ReactNode } from "react";
 import { Meta, Schema } from "@/once-ui/modules";
 import teamData from '../data/team_info.csv';
 import { processTeamData } from '../utils/readCsv';
@@ -163,7 +163,9 @@ export default function Team() {
           Legacy Members:<br />
           Edwin Chen, David Tome, Emily O&#39;Keeffe, Kieran Cooke, Chiana Trabal,
           Vamsikrishna Kurakalva, Dharmesh Chowdhary, Ricardo Yanez Gonzales,
-          Carter Scanlan, William Hamilton, Logan Thompson, Soham Karandikar, Julissa Liang
+          Carter Scanlan, William Hamilton, Logan Thompson, Soham Karandikar, 
+          Julissa Liang, Kennedy Swyers, Luna Harrison, Chloe Li, Evan Chang, 
+          Evan Sharp, Shivani Dodamani
         </p>
       </div>
 
