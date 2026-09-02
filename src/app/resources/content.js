@@ -28,7 +28,7 @@ const social = [
   {
     name: "Instagram",
     icon: "person",
-    link: "https://www.instagram.com/teamvaace/",
+    link: "https://www.instagram.com/vaace_team/",
   },
   {
     name: "LinkedIn",
