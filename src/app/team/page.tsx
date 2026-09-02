@@ -68,18 +68,11 @@ export default function Team() {
   // First 4 members go to Leadership Team
   const leadershipMembers = allMembers.slice(0, 4);
 
-  // Subteam Filtering (Filters by tag or defaults to empty if none exist yet)
-  const engineeringMembers = allMembers.filter((m) =>
-    m.subteams?.some((t) => t.toLowerCase().includes("engineering"))
-  );
+  const engineeringMembers = allMembers.slice(4, 8);
   
-  const softwareMembers = allMembers.filter((m) =>
-    m.subteams?.some((t) => t.toLowerCase().includes("software"))
-  );
-
-  const socialMediaMembers = allMembers.filter((m) =>
-    m.subteams?.some((t) => t.toLowerCase().includes("social") || t.toLowerCase().includes("media"))
-  );
+  // Keep Software & Social Media empty for now
+  const softwareMembers: TeamMember[] = [];
+  const socialMediaMembers: TeamMember[] = [];
 
   const teamSections = [
     { title: "Leadership Team", members: leadershipMembers },
