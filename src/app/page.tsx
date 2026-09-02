@@ -32,7 +32,7 @@ export default function Home() {
         fillWidth
         horizontal="center"
         vertical="start"
-        paddingTop="128"
+        paddingTop="xl"
         direction="column"
       >
         <Heading variant="display-strong-xl">
