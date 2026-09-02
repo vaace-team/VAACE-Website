@@ -158,7 +158,7 @@ export default function Team() {
         <TeamGrid members={teamMembers} />
       </div>
 
-      <div className={styles.memberInfo}>
+      {/* <div className={styles.memberInfo}>
         <p className={styles.school}>
           Legacy Members:<br />
           Edwin Chen, David Tome, Emily O&#39;Keeffe, Kieran Cooke, Chiana Trabal,
@@ -167,7 +167,7 @@ export default function Team() {
           Julissa Liang, Kennedy Swyers, Luna Harrison, Chloe Li, Evan Chang, 
           Evan Sharp, Shivani Dodamani
         </p>
-      </div>
+      </div> */}
 
     </Column>
     </RevealFx>
