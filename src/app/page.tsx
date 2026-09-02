@@ -74,9 +74,9 @@ export default function Home() {
 
       {/* Main Content */}
       <Column fillWidth paddingY="24" gap="m">
-        <Column>
+        <Column horizontal="center">
           {home.featured && (
-            <RevealFx fillWidth horizontal="start" paddingTop="16" paddingBottom="32" paddingLeft="12">
+            <RevealFx fillWidth horizontal="center" paddingTop="16" paddingBottom="32">
               <Badge
                 background="brand-alpha-weak"
                 paddingX="16"
@@ -90,17 +90,23 @@ export default function Home() {
               </Badge>
             </RevealFx>
           )}
-          <RevealFx translateY="4" fillWidth horizontal="start" paddingBottom="16">
-            <Heading variant="display-strong-xl">
+          
+          {/* Centered Headline */}
+          <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
+            <Heading variant="display-strong-xl" align="center">
               {home.headline}
             </Heading>
           </RevealFx>
-          <RevealFx translateY="8" delay={0.2} fillWidth horizontal="start" paddingBottom="32">
-            <Text wrap="balance" onBackground="neutral-strong" variant="display-default-xs">
+
+          {/* Centered Subline */}
+          <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
+            <Text wrap="balance" align="center" onBackground="neutral-strong" variant="display-default-xs">
               {home.subline}
             </Text>
           </RevealFx>
-          <RevealFx paddingTop="12" delay={0.4} horizontal="start" paddingLeft="12">
+
+          {/* Centered Action Button */}
+          <RevealFx paddingTop="12" delay={0.4} horizontal="center">
             <Button
               id="team"
               data-border="rounded"
