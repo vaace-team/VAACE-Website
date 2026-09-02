@@ -8,7 +8,7 @@ import { home, team, person, newsletter } from "@/app/resources/content";
 
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
-  const fullText = "vaace";
+  const fullText = "VAACE";
 
   useEffect(() => {
     let index = 0;
@@ -39,7 +39,7 @@ export default function Home() {
           <span style={{ opacity: 0.5 }}>|</span>
         </Heading>
         <Text variant="body-default-m" onBackground="neutral-weak" marginTop="16">
-          Scroll to explore
+          Welcome! Scroll to explore!
         </Text>
       </Flex>
 
