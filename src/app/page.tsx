@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Heading, Flex, Text, Button, Avatar, RevealFx, Column, Badge, Row } from "@/once-ui/components";
+import { Heading, Flex, Text, Button, Avatar, RevealFx, Column, Badge, Row, Icon, Grid } from "@/once-ui/components";
 import { Projects } from "@/components/work/Projects";
 import { baseURL, routes } from "@/app/resources";
 import { home, team, person, newsletter } from "@/app/resources/content";
@@ -13,7 +13,6 @@ export default function Home() {
 
   useEffect(() => {
     let index = 0;
-    // Typing animation interval
     const typeInterval = setInterval(() => {
       if (index < fullText.length) {
         setDisplayedText(fullText.slice(0, index + 1));
@@ -21,9 +20,8 @@ export default function Home() {
       } else {
         clearInterval(typeInterval);
       }
-    }, 200); // Adjust typing speed here (in milliseconds)
+    }, 200);
 
-    // Blinking cursor interval
     const cursorInterval = setInterval(() => {
       setCursorVisible((prev) => !prev);
     }, 500);
@@ -34,9 +32,30 @@ export default function Home() {
     };
   }, []);
 
+  const features = [
+    {
+      title: "Why Venus?",
+      text: "Venus is Earth’s twin in size but radically different—acidic clouds, crushing pressure, and scorching heat. Exploring Venus helps us understand planetary climate, habitability, and Earth’s own long-term evolution.",
+      icon: "globe",
+      tag: "Target Planet"
+    },
+    {
+      title: "Why an Aerobot?",
+      text: "Traditional landers fail quickly on the extreme surface. Aerobots—high-altitude variable-buoyancy balloons—float safely in the temperate atmospheric zone, enabling extended high-altitude data collection across vast distances.",
+      icon: "sparkles",
+      tag: "Architecture"
+    },
+    {
+      title: "Why Now?",
+      text: "With NASA returning to Venus via VERITAS and DAVINCI, the V.A.A.C.E. team is prototyping next-generation dynamic balloon controls and self-healing skin systems to redefine atmospheric planetary exploration.",
+      icon: "rocket",
+      tag: "Mission Phase"
+    }
+  ];
+
   return (
     <Column maxWidth="m" horizontal="center">
-     {/* Full-Screen Splash Intro */}
+      {/* Full-Screen Splash Intro */}
       <Flex
         style={{ minHeight: "100vh", paddingTop: "200px" }}
         fillWidth
@@ -53,7 +72,7 @@ export default function Home() {
         </Text>
       </Flex>
 
-      {/* Main Content (Appears on Scroll) */}
+      {/* Main Content */}
       <Column fillWidth paddingY="24" gap="m">
         <Column>
           {home.featured && (
@@ -105,32 +124,58 @@ export default function Home() {
         </Column>
       </Column>
 
-      <RevealFx translateY="16" delay={0.6}>
-        <Column gap="l">
-          <Column gap="m">
-            <Heading variant="heading-strong-m">Why Venus?</Heading>
-            <Text variant="body-default-l" onBackground="neutral-weak">
-              Venus is Earth’s twin in size but radically different — acidic clouds, crushing pressure, and scorching heat. Exploring Venus helps us understand climate, habitability, and Earth’s own future.
-            </Text>
+      {/* Revamped Feature Cards */}
+      <RevealFx translateY="16" delay={0.6} fillWidth>
+        <Column gap="l" fillWidth>
+          <Column gap="m" fillWidth>
+            {features.map((item, idx) => (
+              <Column
+                key={idx}
+                background="neutral-weak"
+                border="neutral-alpha-weak"
+                radius="l"
+                padding="24"
+                gap="12"
+                style={{
+                  backdropFilter: "blur(8px)",
+                  transition: "transform 0.2s ease, border-color 0.2s ease"
+                }}
+              >
+               <Row horizontal="space-between" vertical="center" fillWidth>
+                  <Badge 
+                    background="neutral-alpha-weak" 
+                    onBackground="neutral-medium"
+                  >
+                    {item.tag}
+                  </Badge>
+                  <Icon name={item.icon} size="s" onBackground="neutral-medium" />
+                </Row>
+                
+                <Heading variant="heading-strong-m" marginTop="8">
+                  {item.title}
+                </Heading>
+                
+                <Text variant="body-default-s" onBackground="neutral-weak">
+                  {item.text}
+                </Text>
+              </Column>
+            ))}
           </Column>
 
-          <Column gap="m">
-            <Heading variant="heading-strong-m">Why an Aerobot?</Heading>
-            <Text variant="body-default-l" onBackground="neutral-weak">
-              Traditional landers fail quickly on Venus. Aerobots — high-altitude balloons — can float safely in the temperate zone, collecting data for much longer and covering more ground.
+          {/* Closing Highlight Banner */}
+          <Flex
+            fillWidth
+            padding="24"
+            radius="l"
+            background="brand-alpha-weak"
+            border="brand-alpha-medium"
+            horizontal="center"
+            vertical="center"
+          >
+            <Text variant="heading-default-s" align="center" onBackground="neutral-strong">
+              Building, testing, and flying—shaping the future of planetary exploration, one platform at a time.
             </Text>
-          </Column>
-
-          <Column gap="m">
-            <Heading variant="heading-strong-m">Why Now?</Heading>
-            <Text variant="body-default-l" onBackground="neutral-weak">
-              NASA is returning to Venus with missions like <em>VERITAS</em> and <em>DAVINCI</em>. In 2024, our V.A.A.C.E team received early-stage NASA funding to prototype the next generation of Venus aerobots.
-            </Text>
-          </Column>
-
-          <Text variant="body-default-l" onBackground="neutral-weak">
-            We’re building, testing, and flying — shaping the future of planetary exploration, one balloon at a time.
-          </Text>
+          </Flex>
         </Column>
       </RevealFx>
     </Column>
