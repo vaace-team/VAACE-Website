@@ -1,9 +1,8 @@
 // for SEO in meta tags/ schema
-// @shiv check url
 const baseURL = "https://teamvaace.com";
 
 const routes = {
-  // @shiv disabled "about", "blog" routes.
+  // disabled "about", "blog" routes.
   "/": true,
   "/team": true,
   "/work": true,

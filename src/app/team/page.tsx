@@ -98,7 +98,7 @@ export default function Team() {
           horizontal="center"
           gap="16"
         >
-          {/* @shiv update when we have the logo */}
+          {/* update when we have the logo */}
           {/* <Avatar src={person.avatar} size="xl" /> */}
           <Heading className={styles.textAlign} variant="display-strong-xs">
             {person.role}

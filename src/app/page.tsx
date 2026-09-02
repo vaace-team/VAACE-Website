@@ -67,7 +67,7 @@ export default function Home() {
           {displayedText}
           <span style={{ opacity: cursorVisible ? 1 : 0, transition: "opacity 0.1s" }}>|</span>
         </Heading>
-        <Text variant="body-default-m" onBackground="neutral-weak" marginTop="16">
+        <Text variant="heading-default-l" onBackground="neutral-medium" marginTop="16">
           Welcome! Scroll to explore
         </Text>
       </Flex>
@@ -79,10 +79,10 @@ export default function Home() {
             <RevealFx fillWidth horizontal="start" paddingTop="16" paddingBottom="32" paddingLeft="12">
               <Badge
                 background="brand-alpha-weak"
-                paddingX="12"
+                paddingX="16"
                 paddingY="4"
                 onBackground="neutral-strong"
-                textVariant="label-default-s"
+                textVariant="label-default-m"
                 arrow={false}
                 href={home.featured.href}
               >
@@ -91,12 +91,12 @@ export default function Home() {
             </RevealFx>
           )}
           <RevealFx translateY="4" fillWidth horizontal="start" paddingBottom="16">
-            <Heading variant="display-strong-l">
+            <Heading variant="display-strong-xl">
               {home.headline}
             </Heading>
           </RevealFx>
           <RevealFx translateY="8" delay={0.2} fillWidth horizontal="start" paddingBottom="32">
-            <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
+            <Text wrap="balance" onBackground="neutral-strong" variant="display-default-xs">
               {home.subline}
             </Text>
           </RevealFx>
@@ -106,7 +106,7 @@ export default function Home() {
               data-border="rounded"
               href={team.path}
               variant="secondary"
-              size="m"
+              size="l"
               arrowIcon
             >
               <Flex gap="8" vertical="center">
@@ -134,28 +134,31 @@ export default function Home() {
                 background="neutral-weak"
                 border="neutral-alpha-weak"
                 radius="l"
-                padding="24"
-                gap="12"
+                padding="32"
+                gap="16"
                 style={{
                   backdropFilter: "blur(8px)",
                   transition: "transform 0.2s ease, border-color 0.2s ease"
                 }}
               >
-               <Row horizontal="space-between" vertical="center" fillWidth>
+                <Row horizontal="space-between" vertical="center" fillWidth>
                   <Badge 
                     background="neutral-alpha-weak" 
-                    onBackground="neutral-medium"
+                    onBackground="neutral-strong"
+                    paddingX="12"
+                    paddingY="4"
+                    textVariant="label-default-m"
                   >
                     {item.tag}
                   </Badge>
-                  <Icon name={item.icon} size="s" onBackground="neutral-medium" />
+                  <Icon name={item.icon} size="m" onBackground="neutral-medium" />
                 </Row>
                 
-                <Heading variant="heading-strong-m" marginTop="8">
+                <Heading variant="heading-strong-xl" marginTop="8">
                   {item.title}
                 </Heading>
                 
-                <Text variant="body-default-s" onBackground="neutral-weak">
+                <Text variant="body-default-xl" onBackground="neutral-strong" style={{ lineHeight: "1.6" }}>
                   {item.text}
                 </Text>
               </Column>
@@ -165,15 +168,15 @@ export default function Home() {
           {/* Closing Highlight Banner */}
           <Flex
             fillWidth
-            padding="24"
+            padding="32"
             radius="l"
             background="brand-alpha-weak"
             border="brand-alpha-medium"
             horizontal="center"
             vertical="center"
           >
-            <Text variant="heading-default-s" align="center" onBackground="neutral-strong">
-              Building, testing, and flying—shaping the future of planetary exploration, one platform at a time.
+            <Text variant="heading-strong-l" align="center" onBackground="neutral-strong">
+              Building, testing, and flying—shaping the future of planetary exploration, one aerobot at a time.
             </Text>
           </Flex>
         </Column>

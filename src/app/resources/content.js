@@ -56,7 +56,6 @@ const home = {
   description: ``,
   headline: <>Venus Aerobot for Atmosphere and Cloud Exploration</>,
   featured: {
-    // @shiv edit
     display: true,
     // title: <>Recent project: <strong className="ml-4">Annoucing our NASA Funding</strong></>,
     title: <>Recent project: <strong className="ml-4">August 2025, Phase One Complete!</strong></>,
