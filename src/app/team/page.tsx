@@ -1,175 +1,74 @@
-import {
-  // Avatar,
-  Button,
-  Column,
-  Flex,
-  Heading,
-  Icon,
-  IconButton,
-  // SmartImage,
-  // Tag,
-  // Text,
-  RevealFx,
-} from "@/once-ui/components";
+"use client";
 
-import { baseURL } from "@/app/resources";
-import TableOfContents from "@/components/team/TableOfContents";
-import styles from "@/components/team/team.module.scss";
-import { person, team, social } from "@/app/resources/content";
-import React, { ReactNode } from "react";
-import { Meta, Schema } from "@/once-ui/modules";
-import teamData from '../data/team_info.csv';
-import { processTeamData } from '../utils/readCsv';
-import type { TeamMember } from '../utils/readCsv';
-import AMember from '@/components/team/TeamMember';
-import { TypingHeading } from "@/components/TypingHeader";
+import React, { useState, useEffect } from "react";
+import { Heading, Flex, Text, Button, Avatar, RevealFx, Column, Badge, Row, Icon } from "@/once-ui/components";
+import { home, team, person } from "@/app/resources/content";
 
-export async function generateMetadata() {
-  return Meta.generate({
-    title: team.title,
-    description: team.description,
-    baseURL: baseURL,
-    image: `${baseURL}/og?title=${encodeURIComponent(team.title)}`,
-    path: team.path,
-  });
-}
+export default function Home() {
+  const [displayedText, setDisplayedText] = useState("");
+  const [cursorVisible, setCursorVisible] = useState(true);
+  const fullText = "VAACE";
 
-interface TeamGridProps {
-  members: TeamMember[];
-}
+  useEffect(() => {
+    let index = 0;
+    const typeInterval = setInterval(() => {
+      if (index < fullText.length) {
+        setDisplayedText(fullText.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(typeInterval);
+      }
+    }, 200);
 
-function TeamGrid({ members }: TeamGridProps) {
-  return (
-    <div className={styles.teamGrid}>
-      {members.map((member, index) => (
-        <div key={index} className={styles.teamMember}>
-          <AMember {...member} />
-        </div>
-      ))}
-    </div>
-  );
-}
+    const cursorInterval = setInterval(() => {
+      setCursorVisible((prev) => !prev);
+    }, 500);
 
-export default function Team() {
-  const teamMembers = processTeamData(teamData);
-
-  const structure = [
-    {
-      title: team.intro.title,
-      display: team.intro.display,
-      items: [],
-    }
-  ];
+    return () => {
+      clearInterval(typeInterval);
+      clearInterval(cursorInterval);
+    };
+  }, []);
 
   return (
-    <RevealFx translateY="8" delay={0.06}>
-    <Column maxWidth="m">
-      <Schema
-        as="webPage"
-        baseURL={baseURL}
-        title={team.title}
-        description={team.description}
-        path={team.path}
-        image={`${baseURL}/og?title=${encodeURIComponent(team.title)}`}
-        author={{
-          name: person.name,
-          url: `${baseURL}${team.path}`,
-          image: `${baseURL}${person.avatar}`,
-        }}
-      />
-      {/* {team.tableOfContent.display && (
-        <Column
-          left="0"
-          style={{ top: "50%", transform: "translateY(-50%)" }}
-          position="fixed"
-          paddingLeft="24"
-          gap="32"
-          hide="s"
+    <Column maxWidth="m" horizontal="center">
+      {/* Full-Screen Centered Intro */}
+      <Flex
+        style={{ minHeight: "100vh" }}
+        fillWidth
+        horizontal="center"
+        vertical="center"
+        direction="column"
+        paddingX="16"
+      >
+        <Heading variant="display-strong-xl" align="center">
+          {displayedText}
+          <span style={{ opacity: cursorVisible ? 1 : 0, transition: "opacity 0.1s" }}>|</span>
+        </Heading>
+
+        <Heading
+          variant="heading-strong-xl"
+          align="center"
+          marginTop="24"
+          onBackground="neutral-strong"
         >
-          <TableOfContents structure={structure} team={team} />
-        </Column>
-      )} */}
+          Venus Aerobot for Atmosphere and Cloud Exploration
+        </Heading>
 
-
-      <Flex fillWidth mobileDirection="column" horizontal="center">
-        <Column
-          className={styles.blockAlign}
-          flex={9}
-          horizontal="center"
-          gap="16"
+        <Text
+          variant="body-default-xl"
+          align="center"
+          onBackground="neutral-weak"
+          marginTop="16"
+          style={{ lineHeight: "1.6", maxWidth: "32rem" }}
         >
-          {/* update when we have the logo */}
-          {/* <Avatar src={person.avatar} size="xl" /> */}
-          <Heading className={styles.textAlign} variant="display-strong-xs">
-            {person.role}
-          </Heading>
+          V.A.A.C.E is a NASA L'SPACE NPWEE funded, student-led initiative developing innovative phase-change balloon systems to support Venus exploration since Aug 2024.
+        </Text>
 
-          {social.length > 0 && (
-            <Flex
-              className={styles.blockAlign}
-              wrap
-              horizontal="center"
-              fitWidth
-              data-border="rounded"
-            >
-              {social.map((item) =>
-                item.link ? (
-                  <React.Fragment key={item.name}>
-                    <Button
-                      className="s-flex-hide"
-                      href={item.link}
-                      prefixIcon={item.icon}
-                      label={item.name}
-                      size="s"
-                      variant="secondary"
-                    />
-                    <IconButton
-                      className="s-flex-show"
-                      size="l"
-                      href={item.link}
-                      icon={item.icon}
-                      variant="secondary"
-                    />
-                  </React.Fragment>
-                ) : null
-              )}
-            </Flex>
-          )}
-
-          <Flex gap="8" vertical="center" marginTop="m">
-            <Icon onBackground="accent-weak" name="globe" />
-            {"College Park, Maryland"}
-          </Flex>
-
-          {team.intro.display && (
-            <Column textVariant="body-default-l" fillWidth gap="m" marginTop="xl">
-              {team.intro.description}
-            </Column>
-          )}
-        </Column>
+        <Text variant="heading-default-m" onBackground="neutral-medium" marginTop="32">
+          Scroll to explore ↓
+        </Text>
       </Flex>
-
-
-      <div className={styles.teamSection}>
-      <TypingHeading
-        texts={["Our Team", "And more on hover"]}
-        style={{ fontSize: "2rem", marginBottom: "1rem" }}
-      />
-        <TeamGrid members={teamMembers} />
-      </div>
-
-      {/* <div className={styles.memberInfo}>
-        <p className={styles.school}>
-          Legacy Members:<br />
-          Edwin Chen, David Tome, Emily O&#39;Keeffe, Kieran Cooke, Chiana Trabal,
-          Vamsikrishna Kurakalva, Dharmesh Chowdhary, Ricardo Yanez Gonzales,
-          Carter Scanlan, William Hamilton, Logan Thompson, Soham Karandikar, 
-          Julissa Liang, Kennedy Swyers, Luna Harrison, Chloe Li, Evan Chang, 
-          Evan Sharp, Shivani Dodamani
-        </p>
-      </div> */}
-
     </Column>
-    </RevealFx>
   );
 }
