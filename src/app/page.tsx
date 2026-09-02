@@ -26,12 +26,13 @@ export default function Home() {
 
   return (
     <Column maxWidth="m" horizontal="center">
-      {/* Full-Screen Splash Intro */}
+     {/* Full-Screen Splash Intro */}
       <Flex
         style={{ minHeight: "100vh" }}
         fillWidth
         horizontal="center"
-        vertical="center"
+        vertical="start"
+        paddingTop="128"
         direction="column"
       >
         <Heading variant="display-strong-xl">
