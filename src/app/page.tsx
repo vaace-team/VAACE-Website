@@ -8,20 +8,30 @@ import { home, team, person, newsletter } from "@/app/resources/content";
 
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
+  const [cursorVisible, setCursorVisible] = useState(true);
   const fullText = "VAACE";
 
   useEffect(() => {
     let index = 0;
-    const interval = setInterval(() => {
+    // Typing animation interval
+    const typeInterval = setInterval(() => {
       if (index < fullText.length) {
         setDisplayedText(fullText.slice(0, index + 1));
         index++;
       } else {
-        clearInterval(interval);
+        clearInterval(typeInterval);
       }
     }, 200); // Adjust typing speed here (in milliseconds)
 
-    return () => clearInterval(interval);
+    // Blinking cursor interval
+    const cursorInterval = setInterval(() => {
+      setCursorVisible((prev) => !prev);
+    }, 500);
+
+    return () => {
+      clearInterval(typeInterval);
+      clearInterval(cursorInterval);
+    };
   }, []);
 
   return (
@@ -36,10 +46,10 @@ export default function Home() {
       >
         <Heading variant="display-strong-xl">
           {displayedText}
-          <span style={{ opacity: 0.5 }}>|</span>
+          <span style={{ opacity: cursorVisible ? 1 : 0, transition: "opacity 0.1s" }}>|</span>
         </Heading>
         <Text variant="body-default-m" onBackground="neutral-weak" marginTop="16">
-          Welcome! Scroll to explore!
+          Welcome! Scroll to explore
         </Text>
       </Flex>
 
