@@ -62,7 +62,7 @@ export default function Home() {
           marginTop="16"
           style={{ lineHeight: "1.6", maxWidth: "32rem" }}
         >
-          V.A.A.C.E is a NASA L'SPACE NPWEE funded, student-led initiative developing innovative phase-change balloon systems to support Venus exploration since Aug 2024.
+          V.A.A.C.E is a NASA L&apos;SPACE NPWEE funded, student-led initiative developing innovative phase-change balloon systems to support Venus exploration since Aug 2024.
         </Text>
 
         <Text variant="heading-default-m" onBackground="neutral-medium" marginTop="32">
