@@ -28,12 +28,10 @@ export default function Home() {
     <Column maxWidth="m" horizontal="center">
      {/* Full-Screen Splash Intro */}
       <Flex
-        style={{ minHeight: "100vh" }}
+        style={{ minHeight: "100vh", paddingTop: "200px" }}
         fillWidth
         horizontal="center"
         vertical="start"
-        paddingTop="128"
-        marginTop="64"
         direction="column"
       >
         <Heading variant="display-strong-xl">
