@@ -35,7 +35,7 @@ export default function Home() {
   const features = [
     {
       title: "Why Venus?",
-      text: "Venus is Earth’s twin in size but radically different—acidic clouds, crushing pressure, and scorching heat. Exploring Venus helps us understand planetary climate, habitability, and Earth’s own long-term evolution.",
+      text: "Venus is Earth&apos;s twin in size but radically different—acidic clouds, crushing pressure, and scorching heat. Exploring Venus helps us understand planetary climate, habitability, and Earth&apos;s own long-term evolution.",
       icon: "globe",
       tag: "Target Planet"
     },
