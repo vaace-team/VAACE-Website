@@ -1,4 +1,6 @@
+// @ts-ignore
 import "@/once-ui/styles/index.scss";
+// @ts-ignore
 import "@/once-ui/tokens/index.scss";
 import { GalaxyBackground } from "@/components/Galaxy";
 import { ShootingStars } from "@/components/ShootingStars";
