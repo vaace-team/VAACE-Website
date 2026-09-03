@@ -20,45 +20,17 @@ export function Projects({ range }: ProjectsProps) {
   return (
     <Column fillWidth gap="xl" marginBottom="40" paddingX="l">
       {displayedProjects.map((post, index) => (
-        <div
+        <ProjectCard
+          priority={index < 2}
           key={post.slug}
-          style={{
-            // CSS scoping to enlarge card titles and description summaries
-            fontSize: "1.25rem",
-          }}
-        >
-          <style jsx global>{`
-            /* Enlarge Project Card Titles */
-            div[data-project-card="${post.slug}"] h2,
-            div[data-project-card="${post.slug}"] [class*="heading"],
-            div[data-project-card="${post.slug}"] [class*="display"] {
-              font-size: 2rem !important;
-              line-height: 1.25 !important;
-              font-weight: 700 !important;
-            }
-
-            /* Enlarge Project Card Summaries / Descriptions */
-            div[data-project-card="${post.slug}"] p,
-            div[data-project-card="${post.slug}"] [class*="body"] {
-              font-size: 1.2rem !important;
-              line-height: 1.6 !important;
-              color: var(--neutral-on-background-medium, #cbd5e1) !important;
-            }
-          `}</style>
-
-          <div data-project-card={post.slug}>
-            <ProjectCard
-              priority={index < 2}
-              href={`work/${post.slug}`}
-              images={post.metadata.images}
-              title={post.metadata.title}
-              description={post.metadata.summary}
-              content={post.content}
-              avatars={post.metadata.team?.map((member) => ({ src: member.avatar })) || []}
-              link={post.metadata.link || ""}
-            />
-          </div>
-        </div>
+          href={`work/${post.slug}`}
+          images={post.metadata.images}
+          title={post.metadata.title}
+          description={post.metadata.summary}
+          content={post.content}
+          avatars={post.metadata.team?.map((member) => ({ src: member.avatar })) || []}
+          link={post.metadata.link || ""}
+        />
       ))}
     </Column>
   );
