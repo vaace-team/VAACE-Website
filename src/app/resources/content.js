@@ -132,7 +132,7 @@ const gallery = {
   label: "Gallery",
   title: `Photo gallery – ${person.name}`,
   description: `Photos and videos from our LIT and Payload tests Summer 2025`,
-  // Last updated 10/14/25 by shivani
+  // Last updated 10/14/25
   // Add images to the gallery by adding new image objects to the "images" array below
   // Add videos the same way 
   images: [
