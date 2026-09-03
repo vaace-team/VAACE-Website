@@ -65,13 +65,26 @@ function TeamGrid({ members }: TeamGridProps) {
 export default function Team() {
   const allMembers = processTeamData(teamData);
 
-  // First 4 members go to Leadership Team
+  // First 4 CSV rows are designated for Leadership
   const leadershipMembers = allMembers.slice(0, 4);
 
-  const engineeringMembers = allMembers.slice(4, 8);
-  
-  // Keep Software & Social Media empty for now
-  const softwareMembers: TeamMember[] = [];
+  // Process remaining team members starting from index 4
+  const remainingMembers = allMembers.slice(4);
+
+  const keywords = [/computer science/i, /robotics/i];
+
+  // Members with Computer Science or Robotics keywords go to Software
+  const softwareMembers = remainingMembers.filter((member) => {
+    const memberStr = JSON.stringify(member);
+    return keywords.some((pattern) => pattern.test(memberStr));
+  });
+
+  // Remaining non-leadership members go to Engineering
+  const engineeringMembers = remainingMembers.filter((member) => {
+    const memberStr = JSON.stringify(member);
+    return !keywords.some((pattern) => pattern.test(memberStr));
+  });
+
   const socialMediaMembers: TeamMember[] = [];
 
   const teamSections = [
