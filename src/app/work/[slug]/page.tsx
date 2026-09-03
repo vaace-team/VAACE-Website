@@ -73,7 +73,7 @@ export default async function Project({
         }}
       />
 
-      {/* Navigation Header */}
+      {/* Back Button */}
       <Column fillWidth maxWidth="s" gap="16">
         <Button
           data-border="rounded"
@@ -87,13 +87,13 @@ export default async function Project({
         </Button>
       </Column>
 
-      {/* Colorful Gradient Hero Card */}
+      {/* Hero Header Card */}
       <Column
         fillWidth
         maxWidth="s"
         padding="32"
         radius="xl"
-        gap="20"
+        gap="24"
         style={{
           background: "linear-gradient(135deg, rgba(255, 107, 0, 0.12) 0%, rgba(99, 102, 241, 0.12) 50%, rgba(16, 185, 129, 0.12) 100%)",
           border: "1px solid rgba(255, 255, 255, 0.15)",
@@ -101,7 +101,7 @@ export default async function Project({
           backdropFilter: "blur(12px)",
         }}
       >
-        {/* Colorful Category/Tag Badges */}
+        {/* Category / Status Badges */}
         <Flex gap="8" wrap>
           <Flex
             paddingX="12"
@@ -111,7 +111,7 @@ export default async function Project({
               background: "linear-gradient(90deg, #FF6B00 0%, #FF8800 100%)",
               color: "#FFFFFF",
               fontWeight: 700,
-              fontSize: "0.75rem",
+              fontSize: "0.8rem",
               letterSpacing: "0.05em",
               textTransform: "uppercase",
             }}
@@ -127,24 +127,49 @@ export default async function Project({
               border: "1px solid rgba(99, 102, 241, 0.4)",
               color: "#818CF8",
               fontWeight: 600,
-              fontSize: "0.75rem",
+              fontSize: "0.8rem",
             }}
           >
-            Aerospace Initiative
+            Payload Test
           </Flex>
         </Flex>
 
-        <Heading variant="display-strong-xs" style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+        {/* Scaled Up Title */}
+        <Heading
+          variant="display-strong-m"
+          style={{
+            fontSize: "2.5rem",
+            lineHeight: "1.2",
+            background: "linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
           {post.metadata.title}
         </Heading>
 
+        {/* Scaled Up Summary / Subtitle */}
+        {post.metadata.summary && (
+          <Text
+            variant="heading-default-s"
+            style={{
+              fontSize: "1.25rem",
+              lineHeight: "1.6",
+              color: "#CBD5E1",
+              fontWeight: 400,
+            }}
+          >
+            {post.metadata.summary}
+          </Text>
+        )}
+
         {/* Dynamic Metadata Row */}
-        <Flex gap="16" wrap vertical="center" horizontal="space-between">
+        <Flex gap="16" wrap vertical="center" horizontal="space-between" marginTop="8">
           <Flex gap="12" vertical="center">
             {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="m" />}
             <Flex gap="8" vertical="center">
               <Icon name="calendar" size="s" onBackground="accent-weak" />
-              <Text variant="body-default-s" style={{ color: "#94A3B8" }}>
+              <Text variant="body-default-m" style={{ color: "#94A3B8" }}>
                 {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
               </Text>
             </Flex>
@@ -155,7 +180,7 @@ export default async function Project({
               href={post.metadata.link}
               suffixIcon="arrowUpRight"
               variant="primary"
-              size="s"
+              size="m"
               style={{
                 background: "linear-gradient(90deg, #6366F1 0%, #8B5CF6 100%)",
                 border: "none",
@@ -167,8 +192,8 @@ export default async function Project({
         </Flex>
       </Column>
 
-      {/* Styled Project Image Frame */}
-      {post.metadata.images.length > 0 && (
+      {/* Hero Image */}
+      {post.metadata.images && post.metadata.images.length > 0 && (
         <Column fillWidth maxWidth="s" style={{ position: "relative" }}>
           <div
             style={{
@@ -185,14 +210,14 @@ export default async function Project({
             priority
             aspectRatio="16 / 9"
             radius="m"
-            alt="Project Banner Image"
+            alt={post.metadata.title}
             src={post.metadata.images[0]}
             style={{ position: "relative", zIndex: 1 }}
           />
         </Column>
       )}
 
-      {/* Custom MDX Post Body */}
+      {/* Main Content Body */}
       <Column style={{ margin: "auto" }} as="article" maxWidth="xs" fillWidth>
         <CustomMDX source={post.content} />
       </Column>
