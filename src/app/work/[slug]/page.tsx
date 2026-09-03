@@ -138,7 +138,7 @@ export default async function Project({
         <Heading
           variant="display-strong-m"
           style={{
-            fontSize: "2.5rem",
+            fontSize: "1.5rem",
             lineHeight: "1.2",
             background: "linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 100%)",
             WebkitBackgroundClip: "text",
@@ -153,7 +153,7 @@ export default async function Project({
           <Text
             variant="heading-default-s"
             style={{
-              fontSize: "1.25rem",
+              fontSize: "1rem",
               lineHeight: "1.6",
               color: "#CBD5E1",
               fontWeight: 400,
