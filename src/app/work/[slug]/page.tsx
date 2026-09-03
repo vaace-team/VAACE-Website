@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { getPosts } from "@/app/utils/utils";
-import { AvatarGroup, Button, Column, Flex, Heading, SmartImage, Text } from "@/once-ui/components";
+import { AvatarGroup, Button, Column, Flex, Heading, Icon, SmartImage, Text } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import { team, person, work } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
@@ -24,7 +24,7 @@ export async function generateMetadata({
   const routeParams = await params;
   const slugPath = Array.isArray(routeParams.slug) ? routeParams.slug.join('/') : routeParams.slug || '';
 
-  const posts = getPosts(["src", "content", "work", "projects"])
+  const posts = getPosts(["src", "content", "work", "projects"]);
   let post = posts.find((post) => post.slug === slugPath);
 
   if (!post) return {};
@@ -72,30 +72,131 @@ export default async function Project({
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Column maxWidth="xs" gap="16">
-        <Button data-border="rounded" href="/work" variant="tertiary" weight="default" size="s" prefixIcon="chevronLeft">
-          Projects
+
+      {/* Navigation Header */}
+      <Column fillWidth maxWidth="s" gap="16">
+        <Button
+          data-border="rounded"
+          href="/work"
+          variant="secondary"
+          weight="default"
+          size="s"
+          prefixIcon="chevronLeft"
+        >
+          Back to Projects
         </Button>
-        <Heading variant="display-strong-s">{post.metadata.title}</Heading>
       </Column>
-      {post.metadata.images.length > 0 && (
-        <SmartImage
-          priority
-          aspectRatio="16 / 9"
-          radius="m"
-          alt="image"
-          src={post.metadata.images[0]}
-        />
-      )}
-      <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
-        <Flex gap="12" marginBottom="24" vertical="center">
-          {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="m" />}
-          <Text variant="body-default-s" onBackground="neutral-weak">
-            {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
-          </Text>
+
+      {/* Colorful Gradient Hero Card */}
+      <Column
+        fillWidth
+        maxWidth="s"
+        padding="32"
+        radius="xl"
+        gap="20"
+        style={{
+          background: "linear-gradient(135deg, rgba(255, 107, 0, 0.12) 0%, rgba(99, 102, 241, 0.12) 50%, rgba(16, 185, 129, 0.12) 100%)",
+          border: "1px solid rgba(255, 255, 255, 0.15)",
+          boxShadow: "0 20px 40px -15px rgba(0,0,0,0.3)",
+          backdropFilter: "blur(12px)",
+        }}
+      >
+        {/* Colorful Category/Tag Badges */}
+        <Flex gap="8" wrap>
+          <Flex
+            paddingX="12"
+            paddingY="4"
+            radius="s"
+            style={{
+              background: "linear-gradient(90deg, #FF6B00 0%, #FF8800 100%)",
+              color: "#FFFFFF",
+              fontWeight: 700,
+              fontSize: "0.75rem",
+              letterSpacing: "0.05em",
+              textTransform: "uppercase",
+            }}
+          >
+            NASA Funded
+          </Flex>
+          <Flex
+            paddingX="12"
+            paddingY="4"
+            radius="s"
+            style={{
+              background: "rgba(99, 102, 241, 0.2)",
+              border: "1px solid rgba(99, 102, 241, 0.4)",
+              color: "#818CF8",
+              fontWeight: 600,
+              fontSize: "0.75rem",
+            }}
+          >
+            Aerospace Initiative
+          </Flex>
         </Flex>
+
+        <Heading variant="display-strong-xs" style={{ background: "linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+          {post.metadata.title}
+        </Heading>
+
+        {/* Dynamic Metadata Row */}
+        <Flex gap="16" wrap vertical="center" horizontal="space-between">
+          <Flex gap="12" vertical="center">
+            {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="m" />}
+            <Flex gap="8" vertical="center">
+              <Icon name="calendar" size="s" onBackground="accent-weak" />
+              <Text variant="body-default-s" style={{ color: "#94A3B8" }}>
+                {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
+              </Text>
+            </Flex>
+          </Flex>
+
+          {post.metadata.link && (
+            <Button
+              href={post.metadata.link}
+              suffixIcon="arrowUpRight"
+              variant="primary"
+              size="s"
+              style={{
+                background: "linear-gradient(90deg, #6366F1 0%, #8B5CF6 100%)",
+                border: "none",
+              }}
+            >
+              View Announcement
+            </Button>
+          )}
+        </Flex>
+      </Column>
+
+      {/* Styled Project Image Frame */}
+      {post.metadata.images.length > 0 && (
+        <Column fillWidth maxWidth="s" style={{ position: "relative" }}>
+          <div
+            style={{
+              position: "absolute",
+              inset: "-2px",
+              borderRadius: "18px",
+              background: "linear-gradient(45deg, #FF6B00, #6366F1, #10B981)",
+              opacity: 0.5,
+              filter: "blur(8px)",
+              zIndex: 0,
+            }}
+          />
+          <SmartImage
+            priority
+            aspectRatio="16 / 9"
+            radius="m"
+            alt="Project Banner Image"
+            src={post.metadata.images[0]}
+            style={{ position: "relative", zIndex: 1 }}
+          />
+        </Column>
+      )}
+
+      {/* Custom MDX Post Body */}
+      <Column style={{ margin: "auto" }} as="article" maxWidth="xs" fillWidth>
         <CustomMDX source={post.content} />
       </Column>
+
       <ScrollToHash />
     </Column>
   );
