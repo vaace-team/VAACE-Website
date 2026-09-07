@@ -65,41 +65,36 @@ export default function Home() {
 
   return (
     <Column maxWidth="m" horizontal="center">
-      {/* Full-Screen Splash Intro */}
-      <Flex
-        style={{ minHeight: "100vh", paddingTop: "200px", position: "relative" }}
-        fillWidth
-        horizontal="center"
-        vertical="start"
-        direction="column"
-      >
-        {/* Horizontal Row: VAACE Text on Left, Dynamic Logo on Right */}
-        <Row
-          fillWidth
-          horizontal="center"
-          vertical="center"
-          gap="24"
-          wrap
-          style={{ zIndex: 1, position: "relative" }}
-        >
-          {/* Ambient Glow Effect Positioned directly behind the Row */}
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "480px",
-              height: "240px",
-              background:
-                "radial-gradient(ellipse at center, rgba(255, 120, 40, 0.28) 0%, rgba(255, 70, 0, 0.12) 45%, rgba(0, 0, 0, 0) 70%)",
-              filter: "blur(60px)",
-              pointerEvents: "none",
-              zIndex: -1,
-            }}
-          />
+    {/* Full-Screen Splash Intro */}
+    <Flex
+      style={{ minHeight: "100vh", paddingTop: "200px", position: "relative" }}
+      fillWidth
+      horizontal="center"
+      vertical="start"
+      direction="column"
+    >
+      {/* Ambient Glow Effect Positioned behind header area */}
+      <div
+        style={{
+          position: "absolute",
+          top: "25%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "550px",
+          height: "300px",
+          background:
+            "radial-gradient(ellipse at center, rgba(255, 120, 40, 0.28) 0%, rgba(255, 70, 0, 0.12) 45%, rgba(0, 0, 0, 0) 70%)",
+          filter: "blur(60px)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
 
-          {/* Left Side: Typewriter Text */}
+      {/* Main Container: Stacked layout for Text + Logo */}
+      <Column fillWidth gap="24" style={{ zIndex: 1, position: "relative" }}>
+        
+        {/* Box 1: Left-aligned Typewriter Heading */}
+        <Row fillWidth horizontal="start" vertical="center">
           <Heading variant="display-strong-xl">
             {displayedText}
             <span
@@ -111,26 +106,30 @@ export default function Home() {
               |
             </span>
           </Heading>
+        </Row>
 
-          {/* Right Side: Dynamic Logo from content.js */}
+        {/* Box 2: Right-aligned Container for the Larger Logo */}
+        <Row fillWidth horizontal="end" vertical="center">
           <SmartImage
             src={home.logo.src}
             alt={home.logo.alt}
             aspectRatio="1 / 1"
-            radius="m"
-            style={{ width: "120px", height: "120px", objectFit: "cover" }}
+            radius="l"
+            style={{ width: "200px", height: "200px", objectFit: "cover" }} // <-- Increased size from 120px to 200px
           />
         </Row>
 
-        <Text
-          variant="heading-default-l"
-          onBackground="neutral-medium"
-          marginTop="16"
-          style={{ zIndex: 1, position: "relative" }}
-        >
-          Welcome! Scroll to explore
-        </Text>
-      </Flex>
+      </Column>
+
+      <Text
+        variant="heading-default-l"
+        onBackground="neutral-medium"
+        marginTop="24"
+        style={{ zIndex: 1, position: "relative" }}
+      >
+        Welcome! Scroll to explore
+      </Text>
+    </Flex>
 
       {/* Main Content */}
       <Column fillWidth paddingY="24" gap="m">
