@@ -19,7 +19,7 @@ import { home, team, person } from "@/app/resources/content";
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
   const [cursorVisible, setCursorVisible] = useState(true);
-  const fullText = "VAACE";
+  const fullText = "Redefining Venus Exploration.";
 
   useEffect(() => {
     let index = 0;
@@ -113,7 +113,7 @@ export default function Home() {
           marginTop="24"
           style={{ zIndex: 1, position: "relative" }}
         >
-          Welcome! Scroll to explore
+          Welcome! Scroll to know more!
         </Text>
       </Flex>
 
