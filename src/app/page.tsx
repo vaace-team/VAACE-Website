@@ -93,8 +93,8 @@ export default function Home() {
       {/* Main Container: Stacked layout for Text + Logo */}
       <Column fillWidth gap="24" style={{ zIndex: 1, position: "relative" }}>
         
-        {/* Box 1: Left-aligned Typewriter Heading */}
-        <Row fillWidth horizontal="start" vertical="center">
+        {/* Box 1: Centered Typewriter Heading */}
+        <Row fillWidth horizontal="center" vertical="center">
           <Heading variant="display-strong-xl">
             {displayedText}
             <span
@@ -108,14 +108,14 @@ export default function Home() {
           </Heading>
         </Row>
 
-        {/* Box 2: Right-aligned Container for the Larger Logo */}
+        {/* Box 2: Right-aligned Box for the Larger Logo */}
         <Row fillWidth horizontal="end" vertical="center">
           <SmartImage
             src={home.logo.src}
             alt={home.logo.alt}
             aspectRatio="1 / 1"
             radius="l"
-            style={{ width: "200px", height: "200px", objectFit: "cover" }} // <-- Increased size from 120px to 200px
+            style={{ width: "200px", height: "200px", objectFit: "cover" }}
           />
         </Row>
 
