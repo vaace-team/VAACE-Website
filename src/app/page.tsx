@@ -1,10 +1,21 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Heading, Flex, Text, Button, Avatar, RevealFx, Column, Badge, Row, Icon, Grid } from "@/once-ui/components";
-import { Projects } from "@/components/work/Projects";
+import {
+  Heading,
+  Flex,
+  Text,
+  Button,
+  Avatar,
+  RevealFx,
+  Column,
+  Badge,
+  Row,
+  Icon,
+  SmartImage,
+} from "@/once-ui/components";
 import { baseURL, routes } from "@/app/resources";
-import { home, team, person, newsletter } from "@/app/resources/content";
+import { home, team, person } from "@/app/resources/content";
 
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
@@ -37,20 +48,20 @@ export default function Home() {
       title: "Why Venus?",
       text: "Venus is Earth's twin in size but radically different—acidic clouds, crushing pressure, and scorching heat. Exploring Venus helps us understand planetary climate, habitability, and Earth's own long-term evolution.",
       icon: "globe",
-      tag: "Target Planet"
+      tag: "Target Planet",
     },
     {
       title: "Why an Aerobot?",
       text: "Traditional landers fail quickly on the extreme surface. Aerobots—high-altitude variable-buoyancy balloons—float safely in the temperate atmospheric zone, enabling extended high-altitude data collection across vast distances.",
       icon: "sparkles",
-      tag: "Architecture"
+      tag: "Architecture",
     },
     {
       title: "Why Now?",
       text: "With NASA returning to Venus via VERITAS and DAVINCI, the V.A.A.C.E. team is prototyping next-generation dynamic balloon controls and self-healing skin systems to redefine atmospheric planetary exploration.",
       icon: "rocket",
-      tag: "Mission Phase"
-    }
+      tag: "Mission Phase",
+    },
   ];
 
   return (
@@ -63,11 +74,35 @@ export default function Home() {
         vertical="start"
         direction="column"
       >
-        <Heading variant="display-strong-xl">
-          {displayedText}
-          <span style={{ opacity: cursorVisible ? 1 : 0, transition: "opacity 0.1s" }}>|</span>
-        </Heading>
-        <Text variant="heading-default-l" onBackground="neutral-medium" marginTop="16">
+        {/* Horizontal Row: VAACE Text on Left, Logo on Right */}
+        <Row fillWidth horizontal="center" vertical="center" gap="24" wrap>
+          {/* Left Side: Typewriter Text */}
+          <Heading variant="display-strong-xl">
+            {displayedText}
+            <span
+              style={{
+                opacity: cursorVisible ? 1 : 0,
+                transition: "opacity 0.1s",
+              }}
+            >
+              |
+            </span>
+          </Heading>
+
+          {/* Right Side: Logo Image */}
+          <SmartImage
+            src="/images/logo/vaace_logo.jpg"
+            alt="Team V.A.A.C.E. Logo"
+            aspectRatio="1 / 1"
+            style={{ width: "120px", height: "auto" }}
+          />
+        </Row>
+
+        <Text
+          variant="heading-default-l"
+          onBackground="neutral-medium"
+          marginTop="16"
+        >
           Welcome! Scroll to explore
         </Text>
       </Flex>
@@ -76,7 +111,12 @@ export default function Home() {
       <Column fillWidth paddingY="24" gap="m">
         <Column horizontal="center">
           {home.featured && (
-            <RevealFx fillWidth horizontal="center" paddingTop="16" paddingBottom="32">
+            <RevealFx
+              fillWidth
+              horizontal="center"
+              paddingTop="16"
+              paddingBottom="32"
+            >
               <Badge
                 background="brand-alpha-weak"
                 paddingX="16"
@@ -90,17 +130,33 @@ export default function Home() {
               </Badge>
             </RevealFx>
           )}
-          
+
           {/* Centered Headline */}
-          <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
+          <RevealFx
+            translateY="4"
+            fillWidth
+            horizontal="center"
+            paddingBottom="16"
+          >
             <Heading variant="display-strong-xl" align="center">
               {home.headline}
             </Heading>
           </RevealFx>
 
           {/* Centered Subline */}
-          <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
-            <Text wrap="balance" align="center" onBackground="neutral-strong" variant="display-default-xs">
+          <RevealFx
+            translateY="8"
+            delay={0.2}
+            fillWidth
+            horizontal="center"
+            paddingBottom="32"
+          >
+            <Text
+              wrap="balance"
+              align="center"
+              onBackground="neutral-strong"
+              variant="display-default-xs"
+            >
               {home.subline}
             </Text>
           </RevealFx>
@@ -130,7 +186,7 @@ export default function Home() {
         </Column>
       </Column>
 
-      {/* Revamped Feature Cards */}
+      {/* Feature Cards */}
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <Column gap="l" fillWidth>
           <Column gap="m" fillWidth>
@@ -144,12 +200,12 @@ export default function Home() {
                 gap="16"
                 style={{
                   backdropFilter: "blur(8px)",
-                  transition: "transform 0.2s ease, border-color 0.2s ease"
+                  transition: "transform 0.2s ease, border-color 0.2s ease",
                 }}
               >
                 <Row horizontal="space-between" vertical="center" fillWidth>
-                  <Badge 
-                    background="neutral-alpha-weak" 
+                  <Badge
+                    background="neutral-alpha-weak"
                     onBackground="neutral-strong"
                     paddingX="12"
                     paddingY="4"
@@ -157,14 +213,22 @@ export default function Home() {
                   >
                     {item.tag}
                   </Badge>
-                  <Icon name={item.icon} size="m" onBackground="neutral-medium" />
+                  <Icon
+                    name={item.icon}
+                    size="m"
+                    onBackground="neutral-medium"
+                  />
                 </Row>
-                
+
                 <Heading variant="heading-strong-xl" marginTop="8">
                   {item.title}
                 </Heading>
-                
-                <Text variant="body-default-xl" onBackground="neutral-strong" style={{ lineHeight: "1.6" }}>
+
+                <Text
+                  variant="body-default-xl"
+                  onBackground="neutral-strong"
+                  style={{ lineHeight: "1.6" }}
+                >
                   {item.text}
                 </Text>
               </Column>
@@ -181,8 +245,13 @@ export default function Home() {
             horizontal="center"
             vertical="center"
           >
-            <Text variant="heading-strong-l" align="center" onBackground="neutral-strong">
-              Building, testing, and flying—shaping the future of planetary exploration, one aerobot at a time.
+            <Text
+              variant="heading-strong-l"
+              align="center"
+              onBackground="neutral-strong"
+            >
+              Building, testing, and flying—shaping the future of planetary
+              exploration, one aerobot at a time.
             </Text>
           </Flex>
         </Column>
