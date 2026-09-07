@@ -14,8 +14,57 @@ import {
   Icon,
   SmartImage,
 } from "@/once-ui/components";
-import { baseURL, routes } from "@/app/resources";
 import { home, team, person } from "@/app/resources/content";
+
+function TiltCard({ children }: { children: React.ReactNode }) {
+  const [transform, setTransform] = useState(
+    "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)"
+  );
+  const [transition, setTransition] = useState("transform 0.5s ease-out");
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget.getBoundingClientRect();
+    const cardWidth = card.width;
+    const cardHeight = card.height;
+
+    const centerX = e.clientX - card.left - cardWidth / 2;
+    const centerY = e.clientY - card.top - cardHeight / 2;
+
+    const rotateX = (-centerY / (cardHeight / 2)) * 8;
+    const rotateY = (centerX / (cardWidth / 2)) * 8;
+
+    setTransform(
+      `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`
+    );
+  };
+
+  const handleMouseEnter = () => {
+    setTransition("transform 0.1s ease-out");
+  };
+
+  const handleMouseLeave = () => {
+    setTransition("transform 0.5s ease-out");
+    setTransform(
+      "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)"
+    );
+  };
+
+  return (
+    <div
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform,
+        transition,
+        transformStyle: "preserve-3d",
+        width: "100%",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
@@ -68,14 +117,38 @@ export default function Home() {
     <Column maxWidth="m" horizontal="center">
       {/* Full-Screen Splash Intro */}
       <Flex
-        style={{ minHeight: "100vh", paddingTop: "200px" }}
+        style={{ minHeight: "100vh", paddingTop: "200px", position: "relative" }}
         fillWidth
         horizontal="center"
         vertical="start"
         direction="column"
       >
-        {/* Horizontal Row: VAACE Text on Left, Logo on Right */}
-        <Row fillWidth horizontal="center" vertical="center" gap="24" wrap>
+        {/* Ambient Gradient Glow Effect */}
+        <div
+          style={{
+            position: "absolute",
+            top: "15%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "350px",
+            height: "350px",
+            background:
+              "radial-gradient(circle, rgba(255, 120, 40, 0.25) 0%, rgba(255, 70, 0, 0.08) 50%, rgba(0, 0, 0, 0) 75%)",
+            filter: "blur(50px)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+
+        {/* Horizontal Row: VAACE Text on Left, Dynamic Logo on Right */}
+        <Row
+          fillWidth
+          horizontal="center"
+          vertical="center"
+          gap="24"
+          wrap
+          style={{ zIndex: 1, position: "relative" }}
+        >
           {/* Left Side: Typewriter Text */}
           <Heading variant="display-strong-xl">
             {displayedText}
@@ -89,7 +162,7 @@ export default function Home() {
             </span>
           </Heading>
 
-          {/* Right Side: Logo Image */}
+          {/* Right Side: Dynamic Logo from content.js */}
           <SmartImage
             src={home.logo.src}
             alt={home.logo.alt}
@@ -103,6 +176,7 @@ export default function Home() {
           variant="heading-default-l"
           onBackground="neutral-medium"
           marginTop="16"
+          style={{ zIndex: 1, position: "relative" }}
         >
           Welcome! Scroll to explore
         </Text>
@@ -111,7 +185,7 @@ export default function Home() {
       {/* Main Content */}
       <Column fillWidth paddingY="24" gap="m">
         <Column horizontal="center">
-          {home.featured && (
+          {home.featured && home.featured.display && (
             <RevealFx
               fillWidth
               horizontal="center"
@@ -192,47 +266,47 @@ export default function Home() {
         <Column gap="l" fillWidth>
           <Column gap="m" fillWidth>
             {features.map((item, idx) => (
-              <Column
-                key={idx}
-                background="neutral-weak"
-                border="neutral-alpha-weak"
-                radius="l"
-                padding="32"
-                gap="16"
-                style={{
-                  backdropFilter: "blur(8px)",
-                  transition: "transform 0.2s ease, border-color 0.2s ease",
-                }}
-              >
-                <Row horizontal="space-between" vertical="center" fillWidth>
-                  <Badge
-                    background="neutral-alpha-weak"
-                    onBackground="neutral-strong"
-                    paddingX="12"
-                    paddingY="4"
-                    textVariant="label-default-m"
-                  >
-                    {item.tag}
-                  </Badge>
-                  <Icon
-                    name={item.icon}
-                    size="m"
-                    onBackground="neutral-medium"
-                  />
-                </Row>
-
-                <Heading variant="heading-strong-xl" marginTop="8">
-                  {item.title}
-                </Heading>
-
-                <Text
-                  variant="body-default-xl"
-                  onBackground="neutral-strong"
-                  style={{ lineHeight: "1.6" }}
+              <TiltCard key={idx}>
+                <Column
+                  background="neutral-weak"
+                  border="neutral-alpha-weak"
+                  radius="l"
+                  padding="32"
+                  gap="16"
+                  style={{
+                    backdropFilter: "blur(8px)",
+                  }}
                 >
-                  {item.text}
-                </Text>
-              </Column>
+                  <Row horizontal="space-between" vertical="center" fillWidth>
+                    <Badge
+                      background="neutral-alpha-weak"
+                      onBackground="neutral-strong"
+                      paddingX="12"
+                      paddingY="4"
+                      textVariant="label-default-m"
+                    >
+                      {item.tag}
+                    </Badge>
+                    <Icon
+                      name={item.icon}
+                      size="m"
+                      onBackground="neutral-medium"
+                    />
+                  </Row>
+
+                  <Heading variant="heading-strong-xl" marginTop="8">
+                    {item.title}
+                  </Heading>
+
+                  <Text
+                    variant="body-default-xl"
+                    onBackground="neutral-strong"
+                    style={{ lineHeight: "1.6" }}
+                  >
+                    {item.text}
+                  </Text>
+                </Column>
+              </TiltCard>
             ))}
           </Column>
 
