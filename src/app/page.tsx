@@ -52,7 +52,7 @@ export default function Home() {
     {
       title: "Why an Aerobot?",
       text: "Traditional landers fail quickly on the extremely hot surface. Aerobots—high-altitude variable-buoyancy balloons—float safely in the temperate atmospheric zone, enabling extended high-altitude data collection across vast distances.",
-      icon: "sparkles",
+      icon: "sparkle",
       tag: "Architecture",
     },
     {
