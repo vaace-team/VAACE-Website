@@ -93,7 +93,10 @@ export default function Home() {
         {/* Centered Typewriter Heading */}
         <Column fillWidth gap="24" style={{ zIndex: 1, position: "relative" }}>
           <Row fillWidth horizontal="center" vertical="center">
-            <Heading variant="display-strong-xl">
+            <Heading variant="display-strong-xl"
+            align="center"
+            style={{ whiteSpace: "nowrap" }}
+            >
               {displayedText}
               <span
                 style={{
