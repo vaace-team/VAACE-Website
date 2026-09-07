@@ -16,56 +16,6 @@ import {
 } from "@/once-ui/components";
 import { home, team, person } from "@/app/resources/content";
 
-function TiltCard({ children }: { children: React.ReactNode }) {
-  const [transform, setTransform] = useState(
-    "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)"
-  );
-  const [transition, setTransition] = useState("transform 0.5s ease-out");
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const card = e.currentTarget.getBoundingClientRect();
-    const cardWidth = card.width;
-    const cardHeight = card.height;
-
-    const centerX = e.clientX - card.left - cardWidth / 2;
-    const centerY = e.clientY - card.top - cardHeight / 2;
-
-    const rotateX = (-centerY / (cardHeight / 2)) * 8;
-    const rotateY = (centerX / (cardWidth / 2)) * 8;
-
-    setTransform(
-      `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`
-    );
-  };
-
-  const handleMouseEnter = () => {
-    setTransition("transform 0.1s ease-out");
-  };
-
-  const handleMouseLeave = () => {
-    setTransition("transform 0.5s ease-out");
-    setTransform(
-      "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)"
-    );
-  };
-
-  return (
-    <div
-      onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        transform,
-        transition,
-        transformStyle: "preserve-3d",
-        width: "100%",
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
   const [cursorVisible, setCursorVisible] = useState(true);
@@ -123,23 +73,6 @@ export default function Home() {
         vertical="start"
         direction="column"
       >
-        {/* Ambient Gradient Glow Effect */}
-        <div
-          style={{
-            position: "absolute",
-            top: "15%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "350px",
-            height: "350px",
-            background:
-              "radial-gradient(circle, rgba(255, 120, 40, 0.25) 0%, rgba(255, 70, 0, 0.08) 50%, rgba(0, 0, 0, 0) 75%)",
-            filter: "blur(50px)",
-            pointerEvents: "none",
-            zIndex: 0,
-          }}
-        />
-
         {/* Horizontal Row: VAACE Text on Left, Dynamic Logo on Right */}
         <Row
           fillWidth
@@ -149,6 +82,23 @@ export default function Home() {
           wrap
           style={{ zIndex: 1, position: "relative" }}
         >
+          {/* Ambient Glow Effect Positioned directly behind the Row */}
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "480px",
+              height: "240px",
+              background:
+                "radial-gradient(ellipse at center, rgba(255, 120, 40, 0.28) 0%, rgba(255, 70, 0, 0.12) 45%, rgba(0, 0, 0, 0) 70%)",
+              filter: "blur(60px)",
+              pointerEvents: "none",
+              zIndex: -1,
+            }}
+          />
+
           {/* Left Side: Typewriter Text */}
           <Heading variant="display-strong-xl">
             {displayedText}
@@ -266,47 +216,47 @@ export default function Home() {
         <Column gap="l" fillWidth>
           <Column gap="m" fillWidth>
             {features.map((item, idx) => (
-              <TiltCard key={idx}>
-                <Column
-                  background="neutral-weak"
-                  border="neutral-alpha-weak"
-                  radius="l"
-                  padding="32"
-                  gap="16"
-                  style={{
-                    backdropFilter: "blur(8px)",
-                  }}
-                >
-                  <Row horizontal="space-between" vertical="center" fillWidth>
-                    <Badge
-                      background="neutral-alpha-weak"
-                      onBackground="neutral-strong"
-                      paddingX="12"
-                      paddingY="4"
-                      textVariant="label-default-m"
-                    >
-                      {item.tag}
-                    </Badge>
-                    <Icon
-                      name={item.icon}
-                      size="m"
-                      onBackground="neutral-medium"
-                    />
-                  </Row>
-
-                  <Heading variant="heading-strong-xl" marginTop="8">
-                    {item.title}
-                  </Heading>
-
-                  <Text
-                    variant="body-default-xl"
+              <Column
+                key={idx}
+                background="neutral-weak"
+                border="neutral-alpha-weak"
+                radius="l"
+                padding="32"
+                gap="16"
+                style={{
+                  backdropFilter: "blur(8px)",
+                  transition: "border-color 0.2s ease, transform 0.2s ease",
+                }}
+              >
+                <Row horizontal="space-between" vertical="center" fillWidth>
+                  <Badge
+                    background="neutral-alpha-weak"
                     onBackground="neutral-strong"
-                    style={{ lineHeight: "1.6" }}
+                    paddingX="12"
+                    paddingY="4"
+                    textVariant="label-default-m"
                   >
-                    {item.text}
-                  </Text>
-                </Column>
-              </TiltCard>
+                    {item.tag}
+                  </Badge>
+                  <Icon
+                    name={item.icon}
+                    size="m"
+                    onBackground="neutral-medium"
+                  />
+                </Row>
+
+                <Heading variant="heading-strong-xl" marginTop="8">
+                  {item.title}
+                </Heading>
+
+                <Text
+                  variant="body-default-xl"
+                  onBackground="neutral-strong"
+                  style={{ lineHeight: "1.6" }}
+                >
+                  {item.text}
+                </Text>
+              </Column>
             ))}
           </Column>
 
