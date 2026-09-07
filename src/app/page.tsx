@@ -143,8 +143,8 @@ export default function Home() {
               </Badge>
             </RevealFx>
           )}
-
-          {/* Headline + Logo Row (Headline on the left, Logo on the right) */}
+          
+          {/* Headline + Logo Row */}
           <RevealFx
             translateY="4"
             fillWidth
@@ -153,23 +153,25 @@ export default function Home() {
           >
             <Row
               fillWidth
-              horizontal="space-between"
+              horizontal="center"
               vertical="center"
               gap="32"
               style={{ flexWrap: "wrap" }}
             >
-              <Flex style={{ flex: 1, minWidth: "280px" }}>
+              {/* Headline Container (Expanded maxWidth for extra line length) */}
+              <Flex style={{ flex: "1 1 550px", maxWidth: "750px" }}>
                 <Heading variant="display-strong-xl" wrap="balance">
                   {home.headline}
                 </Heading>
               </Flex>
 
+              {/* Right Logo (Increased size from 180px to 240px) */}
               <SmartImage
                 src={home.logo.src}
                 alt={home.logo.alt}
                 aspectRatio="1 / 1"
                 radius="l"
-                style={{ width: "180px", height: "180px", objectFit: "cover" }}
+                style={{ width: "240px", height: "240px", objectFit: "cover", flexShrink: 0 }}
               />
             </Row>
           </RevealFx>
