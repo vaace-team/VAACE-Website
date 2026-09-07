@@ -143,7 +143,7 @@ export default function Home() {
               </Badge>
             </RevealFx>
           )}
-          
+
           {/* Headline + Logo Row */}
           <RevealFx
             translateY="4"
@@ -155,7 +155,7 @@ export default function Home() {
               fillWidth
               horizontal="center"
               vertical="center"
-              gap="32"
+              gap="16"
               style={{ flexWrap: "wrap" }}
             >
               {/* Headline Container (Expanded maxWidth for extra line length) */}
