@@ -161,7 +161,7 @@ export default function Home() {
             translateY="4"
             fillWidth
             horizontal="center"
-            paddingBottom="16"
+            paddingBottom="24"
           >
             <Heading variant="display-strong-xl" align="center">
               {home.headline}
@@ -180,7 +180,8 @@ export default function Home() {
               wrap="balance"
               align="center"
               onBackground="neutral-strong"
-              variant="display-default-xs"
+              variant="body-strong-xs"
+              style={{ lineHeight: "1.6" }}
             >
               {home.subline}
             </Text>
