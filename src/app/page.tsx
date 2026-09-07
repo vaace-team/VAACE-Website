@@ -19,7 +19,7 @@ import { home, team, person } from "@/app/resources/content";
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
   const [cursorVisible, setCursorVisible] = useState(true);
-  const fullText = "Redefining Venus Exploration.";
+  const fullText = "Redefining Venus Exploration";
 
   useEffect(() => {
     let index = 0;
@@ -30,7 +30,7 @@ export default function Home() {
       } else {
         clearInterval(typeInterval);
       }
-    }, 200);
+    }, 100);
 
     const cursorInterval = setInterval(() => {
       setCursorVisible((prev) => !prev);
@@ -113,7 +113,7 @@ export default function Home() {
           marginTop="24"
           style={{ zIndex: 1, position: "relative" }}
         >
-          Welcome! Scroll to know more!
+          Welcome! Scroll to know more
         </Text>
       </Flex>
 
