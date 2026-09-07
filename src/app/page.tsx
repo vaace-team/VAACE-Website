@@ -46,19 +46,19 @@ export default function Home() {
   const features = [
     {
       title: "Why Venus?",
-      text: "Venus is Earth's twin in size but radically different—acidic clouds, crushing pressure, and scorching heat. Exploring Venus helps us understand planetary climate, habitability, and Earth's own long-term evolution.",
+      text: "Venus is Earth's evil twin in size but radically different—acidic clouds, crushing pressure, and scorching heat. Exploring Venus helps us understand planetary climate, habitability, and Earth's own long-term evolution.",
       icon: "globe",
       tag: "Target Planet",
     },
     {
       title: "Why an Aerobot?",
-      text: "Traditional landers fail quickly on the extreme surface. Aerobots—high-altitude variable-buoyancy balloons—float safely in the temperate atmospheric zone, enabling extended high-altitude data collection across vast distances.",
+      text: "Traditional landers fail quickly on the extremely hot surface. Aerobots—high-altitude variable-buoyancy balloons—float safely in the temperate atmospheric zone, enabling extended high-altitude data collection across vast distances.",
       icon: "sparkles",
       tag: "Architecture",
     },
     {
       title: "Why Now?",
-      text: "With NASA returning to Venus via VERITAS and DAVINCI, the V.A.A.C.E. team is prototyping next-generation dynamic balloon controls and self-healing skin systems to redefine atmospheric planetary exploration.",
+      text: "With NASA returning to Venus via VERITAS and DAVINCI in the 2030s, the V.A.A.C.E. team is prototyping next-generation dynamic balloon controls and self-healing skin systems to redefine atmospheric planetary exploration!",
       icon: "rocket",
       tag: "Mission Phase",
     },
