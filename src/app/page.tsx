@@ -65,75 +65,61 @@ export default function Home() {
 
   return (
     <Column maxWidth="m" horizontal="center">
-    {/* Full-Screen Splash Intro */}
-    <Flex
-      style={{ minHeight: "100vh", paddingTop: "200px", position: "relative" }}
-      fillWidth
-      horizontal="center"
-      vertical="start"
-      direction="column"
-    >
-      {/* Ambient Glow Effect Positioned behind header area */}
-      <div
-        style={{
-          position: "absolute",
-          top: "25%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "550px",
-          height: "300px",
-          background:
-            "radial-gradient(ellipse at center, rgba(255, 120, 40, 0.28) 0%, rgba(255, 70, 0, 0.12) 45%, rgba(0, 0, 0, 0) 70%)",
-          filter: "blur(60px)",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
-
-      {/* Main Container: Stacked layout for Text + Logo */}
-      <Column fillWidth gap="24" style={{ zIndex: 1, position: "relative" }}>
-        
-        {/* Box 1: Centered Typewriter Heading */}
-        <Row fillWidth horizontal="center" vertical="center">
-          <Heading variant="display-strong-xl">
-            {displayedText}
-            <span
-              style={{
-                opacity: cursorVisible ? 1 : 0,
-                transition: "opacity 0.1s",
-              }}
-            >
-              |
-            </span>
-          </Heading>
-        </Row>
-
-        {/* Box 2: Right-aligned Box for the Larger Logo */}
-        <Row fillWidth horizontal="end" vertical="center">
-          <SmartImage
-            src={home.logo.src}
-            alt={home.logo.alt}
-            aspectRatio="1 / 1"
-            radius="l"
-            style={{ width: "200px", height: "200px", objectFit: "cover" }}
-          />
-        </Row>
-
-      </Column>
-
-      <Text
-        variant="heading-default-l"
-        onBackground="neutral-medium"
-        marginTop="24"
-        style={{ zIndex: 1, position: "relative" }}
+      {/* 1. Full-Screen Splash Intro */}
+      <Flex
+        style={{ minHeight: "100vh", paddingTop: "200px", position: "relative" }}
+        fillWidth
+        horizontal="center"
+        vertical="start"
+        direction="column"
       >
-        Welcome! Scroll to explore
-      </Text>
-    </Flex>
+        {/* Ambient Glow Effect Positioned behind header area */}
+        <div
+          style={{
+            position: "absolute",
+            top: "25%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "550px",
+            height: "300px",
+            background:
+              "radial-gradient(ellipse at center, rgba(255, 120, 40, 0.28) 0%, rgba(255, 70, 0, 0.12) 45%, rgba(0, 0, 0, 0) 70%)",
+            filter: "blur(60px)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
 
-      {/* Main Content */}
+        {/* Centered Typewriter Heading */}
+        <Column fillWidth gap="24" style={{ zIndex: 1, position: "relative" }}>
+          <Row fillWidth horizontal="center" vertical="center">
+            <Heading variant="display-strong-xl">
+              {displayedText}
+              <span
+                style={{
+                  opacity: cursorVisible ? 1 : 0,
+                  transition: "opacity 0.1s",
+                }}
+              >
+                |
+              </span>
+            </Heading>
+          </Row>
+        </Column>
+
+        <Text
+          variant="heading-default-l"
+          onBackground="neutral-medium"
+          marginTop="24"
+          style={{ zIndex: 1, position: "relative" }}
+        >
+          Welcome! Scroll to explore
+        </Text>
+      </Flex>
+
+      {/* 2. Main Content */}
       <Column fillWidth paddingY="24" gap="m">
-        <Column horizontal="center">
+        <Column horizontal="center" fillWidth>
           {home.featured && home.featured.display && (
             <RevealFx
               fillWidth
@@ -155,16 +141,34 @@ export default function Home() {
             </RevealFx>
           )}
 
-          {/* Centered Headline */}
+          {/* Headline + Logo Row (Headline on the left, Logo on the right) */}
           <RevealFx
             translateY="4"
             fillWidth
             horizontal="center"
             paddingBottom="24"
           >
-            <Heading variant="display-strong-xl" align="center">
-              {home.headline}
-            </Heading>
+            <Row
+              fillWidth
+              horizontal="space-between"
+              vertical="center"
+              gap="32"
+              style={{ flexWrap: "wrap" }}
+            >
+              <Flex style={{ flex: 1, minWidth: "280px" }}>
+                <Heading variant="display-strong-xl" wrap="balance">
+                  {home.headline}
+                </Heading>
+              </Flex>
+
+              <SmartImage
+                src={home.logo.src}
+                alt={home.logo.alt}
+                aspectRatio="1 / 1"
+                radius="l"
+                style={{ width: "180px", height: "180px", objectFit: "cover" }}
+              />
+            </Row>
           </RevealFx>
 
           {/* Centered Subline */}
@@ -211,7 +215,7 @@ export default function Home() {
         </Column>
       </Column>
 
-      {/* Feature Cards */}
+      {/* 3. Feature Cards */}
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <Column gap="l" fillWidth>
           <Column gap="m" fillWidth>
