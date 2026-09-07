@@ -1,4 +1,3 @@
-
 const person = {
   firstName: "V.A.A.C.E",
   lastName: "",
@@ -51,6 +50,10 @@ const social = [
 const home = {
   path: "/",
   image: "/images/og/home.jpg",
+  logo: {
+    src: "/images/logo/vaace_logo.jpg",
+    alt: "Team V.A.A.C.E. Logo",
+  },
   label: "Home",
   title: `${person.name}`,
   description: ``,

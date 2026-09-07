@@ -91,10 +91,11 @@ export default function Home() {
 
           {/* Right Side: Logo Image */}
           <SmartImage
-            src="/images/logo/vaace_logo.jpg"
-            alt="Team V.A.A.C.E. Logo"
+            src={home.logo.src}
+            alt={home.logo.alt}
             aspectRatio="1 / 1"
-            style={{ width: "120px", height: "auto" }}
+            radius="m"
+            style={{ width: "120px", height: "120px", objectFit: "cover" }}
           />
         </Row>
 
