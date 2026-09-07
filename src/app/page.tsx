@@ -180,7 +180,7 @@ export default function Home() {
               wrap="balance"
               align="center"
               onBackground="neutral-strong"
-              variant="body-strong-xs"
+              variant="body-strong-l"
               style={{ lineHeight: "1.6" }}
             >
               {home.subline}
